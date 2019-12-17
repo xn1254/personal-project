@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-06 15:51:53
- * @LastEditTime: 2019-12-11 14:37:36
+ * @LastEditTime: 2019-12-17 23:51:29
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \express-project\admin\src\views\CategoriesEdit.vue
@@ -33,12 +33,6 @@
 import { Vue, Component, Prop } from 'vue-property-decorator';
 import { VueEditor } from 'vue2-editor';
 
-interface CategoriesModel {
-  title: string;
-  body: string;
-  categories: object[];
-}
-
 @Component({
   components: {
     VueEditor,
@@ -47,7 +41,7 @@ interface CategoriesModel {
 
 // 导入的其他文件 例如：import moduleName from 'modulePath';
 export default class ArticlesEdit extends Vue {
-  public model: CategoriesModel = {
+  public model: ArticlesModel = {
     title: '',
     body: '',
     categories: [],

@@ -1,3 +1,4 @@
+@import './_variables.scss';
 // 样式重置
 *{
     box-sizing: border-box;
@@ -17,15 +18,6 @@ a{
 }
 
 // 定义通用颜色类
-$colors: (
-    "primary": #db9e3f,
-    "white": #fff,
-    "black": #000,
-    "dark": #222,
-    "grey": #999,
-    "light": #f9f9f9,
-    "dark-1": #343440
-);
 @each $colorKey, $color in $colors {
     .text-#{$colorKey} {
         color: $color;
@@ -38,21 +30,21 @@ $colors: (
 // 定义通用字体类
 @each $var in (left, center, right) {
     .text-#{$var} {
-        text-align: $var
+        text-align: $var !important
     }
 }
-$base-font-size: 1rem;
-$font-size: (
-    xs: 0.7692,// 10px
-    sm: 0.9231,// 12px
-    md: 1,// 13px
-    lg: 1.0769,// 14px
-    xl: 1.2308// 16px
-);
-@each $sizeKey, $size in $font-size {
+@each $sizeKey, $size in $font-sizes {
     .fs-#{$sizeKey} {
         font-size: $size * $base-font-size;
     }
+}
+
+.w-100{
+    width: 100%;
+}
+
+.h-100{
+    height: 100%;
 }
 
 // 定义通用flex布局类
@@ -62,28 +54,19 @@ $font-size: (
 .flex-column{
     flex-direction: column;
 }
+.flex-wrap{
+    flex-wrap: wrap;
+}
 .flex-1{
     flex: 1;
 }
-$flex-jc: (
-    start: flex-start,
-    end: flex-end,
-    center: center,
-    between: space-between,
-    around: space-around
-);
+
 @each $key, $value in $flex-jc {
     .jc-#{$key} {
         justify-content: $value;
     }
 }
 
-$flex-ai: (
-    start: flex-start,
-    end: flex-end,
-    center: center,
-    stretch: stretch
-);
 @each $key, $value in $flex-ai {
     .ai-#{$key} {
         align-items: $value;
@@ -91,34 +74,15 @@ $flex-ai: (
 }
 
 //  定义通用边距类
-$spacing-types: (
-    m: margin,
-    p: padding,
-);
-$spacing-directions: (
-    t: top,
-    r: right,
-    b: bottom,
-    l: left
-);
-$spacing-base-size: 1rem;
-$spacing-size: (
-    0: 0,
-    1: 0.25,
-    2: 0.5,
-    3: 1,
-    4: 1.5,
-    5: 3
-);
 @each $typeKey, $type in $spacing-types {
     // m-0
-    @each $sizeKey, $size in $spacing-size {
+    @each $sizeKey, $size in $spacing-sizes {
         .#{$typeKey}-#{$sizeKey} {
             #{$type}: $size * $spacing-base-size
         }
     }
     // my-0
-    @each $sizeKey, $size in $spacing-size {
+    @each $sizeKey, $size in $spacing-sizes {
         .#{$typeKey}x-#{$sizeKey} {
             #{$type}-left: $size * $spacing-base-size;
             #{$type}-right: $size * $spacing-base-size
@@ -130,10 +94,61 @@ $spacing-size: (
     }
     // mr-0
     @each $directionKey, $direction in $spacing-directions {
-        @each $sizeKey, $size in $spacing-size {
+        @each $sizeKey, $size in $spacing-sizes {
             .#{$typeKey}#{$directionKey}-#{$sizeKey} {
                 #{$type}-#{$direction}: $size * $spacing-base-size
             }
         }
     }
 }
+
+.btn{
+    border: none;
+    border-radius: 0.1538rem;
+    font-size: map-get($font-sizes, 'sm') * $base-font-size;
+    padding: 0.2rem 0.6rem;
+}
+
+.nav {
+    display: flex;
+    .nav-item {
+        // 保证nav高度对齐
+      border-bottom: 3px solid transparent;
+      padding-bottom: 0.2rem;
+      &.active {
+        color: map-get($colors, 'primary');
+        border-bottom-color: map-get($colors, 'primary');
+      }
+    }
+    &.nav-inverse {
+      .nav-item {
+        color: map-get($colors, 'white');
+        &.active {
+          border-bottom-color: map-get($colors, 'white');
+        }
+      }
+    }
+  }
+
+// sprite
+.sprite {
+    background: url(../assets/images/index.png) no-repeat 0 0;
+    background-size: 28.8462rem;
+    display: inline-block;
+    &.sprite-news {
+      width: 1.7692rem;
+      height: 1.5385rem;
+      background-position: 63.546% 15.517%;
+    }
+    &.sprite-arrow{
+      width: 0.7692rem;
+      height: 0.7692rem;
+      background-position: 38.577% 52.076%;
+    }
+  }
+  // borders
+  @each $dir in (top, right, bottom, left) {
+    .border-#{$dir} {
+      border-#{$dir}: 1px solid $border-color;
+    }
+  }

@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-06 15:52:10
- * @LastEditTime: 2019-12-11 14:41:36
- * @LastEditors: Please set LastEditors
+ * @LastEditTime : 2019-12-18 00:08:29
+ * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \express-project\admin\src\views\CategoriesList.vue
  -->
@@ -30,14 +30,8 @@
 <script lang='ts'>
 import { Vue, Component } from 'vue-property-decorator';
 
-interface ListItem {
-  _id: string;
-  username: string;
-  _v: number;
-}
-
 @Component
-export default class CategoriesList extends Vue {
+export default class AdminUserList extends Vue {
   public items: object[] = [];
   public created() {
     this.fetch();
@@ -46,7 +40,7 @@ export default class CategoriesList extends Vue {
     const res = await this.$https.get('rest/admin_users');
     this.items = res.data;
   }
-  public async deleteItem(row: ListItem) {
+  public async deleteItem(row: UserItemModel) {
     this.$confirm(`确认删除用户${row.username}`, '提示', {
       confirmButtonText: '确定',
       cancelButtonText: '取消',

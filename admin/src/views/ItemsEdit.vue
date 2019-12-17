@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-06 15:51:53
- * @LastEditTime: 2019-12-13 16:30:08
+ * @LastEditTime: 2019-12-17 23:55:30
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \express-project\admin\src\views\CategoriesEdit.vue
@@ -36,15 +36,10 @@
 <script lang='ts'>
 import { Vue, Component, Prop } from 'vue-property-decorator';
 
-interface ItemModel {
-  name: string;
-  icon: string;
-}
-
 @Component
 // 导入的其他文件 例如：import moduleName from 'modulePath';
 export default class ItemsEdit extends Vue {
-  public model: ItemModel = {
+  public model: GoodsModel = {
     name: '',
     icon: '',
   };

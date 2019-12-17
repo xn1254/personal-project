@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-06 15:51:53
- * @LastEditTime: 2019-12-13 16:29:20
+ * @LastEditTime: 2019-12-17 23:58:27
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \express-project\admin\src\views\CategoriesEdit.vue
@@ -49,15 +49,10 @@
 <script lang='ts'>
 import { Vue, Component, Prop } from 'vue-property-decorator';
 
-interface CategoriesModel {
-  name: string;
-  items: object[];
-}
-
 @Component
 // 导入的其他文件 例如：import moduleName from 'modulePath';
 export default class AdaEdit extends Vue {
-  public model: CategoriesModel = {
+  public model: AdsModel = {
     name: '',
     items: [],
   };

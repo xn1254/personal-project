@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-06 15:51:53
- * @LastEditTime: 2019-12-11 01:11:42
+ * @LastEditTime: 2019-12-17 23:54:14
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \express-project\admin\src\views\CategoriesEdit.vue
@@ -112,20 +112,6 @@
 
 <script lang='ts'>
 import { Vue, Component, Prop } from 'vue-property-decorator';
-
-interface HeroModel {
-  name: string;
-  title: string;
-  categories: string[];
-  avatar: string;
-  scores: object;
-  item1: object[];
-  item2: object[];
-  skills: object[];
-  usageTips: string;
-  battleTips: string;
-  teamTips: string;
-}
 
 @Component
 // 导入的其他文件 例如：import moduleName from 'modulePath';

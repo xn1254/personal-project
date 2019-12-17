@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-11 15:38:36
- * @LastEditTime: 2019-12-12 20:08:30
+ * @LastEditTime: 2019-12-17 23:56:49
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \express-project\admin\src\views\Login.vue
@@ -26,14 +26,9 @@
 <script lang='ts'>
 import { Vue, Component } from 'vue-property-decorator';
 
-interface LoginModel {
-  username: string;
-  password: string;
-}
-
 @Component
 export default class Login extends Vue {
-  public model: LoginModel = {
+  public model: UserModel = {
     username: '',
     password: '',
   };

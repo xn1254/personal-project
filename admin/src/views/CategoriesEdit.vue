@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-06 15:51:53
- * @LastEditTime: 2019-12-09 23:59:50
+ * @LastEditTime: 2019-12-17 23:52:52
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \express-project\admin\src\views\CategoriesEdit.vue
@@ -28,11 +28,6 @@
 
 <script lang='ts'>
 import { Vue, Component, Prop } from 'vue-property-decorator';
-
-interface CategoriesModel {
-  name: string;
-  parent: object[];
-}
 
 @Component
 // 导入的其他文件 例如：import moduleName from 'modulePath';
