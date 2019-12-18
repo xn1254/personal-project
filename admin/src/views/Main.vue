@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-06 00:00:23
- * @LastEditTime: 2019-12-11 14:39:53
- * @LastEditors: Please set LastEditors
+ * @LastEditTime : 2019-12-18 14:41:02
+ * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \express-project\admin\src\views\Main.vue
  -->
@@ -54,7 +54,8 @@
 
   <el-container>
     <el-main>
-      <router-view></router-view>
+      <!-- 绑定key用于解决不同路径相同组件间的复用问题 -->
+      <router-view :key="$route.path"></router-view>
     </el-main>
   </el-container>
   </el-container>

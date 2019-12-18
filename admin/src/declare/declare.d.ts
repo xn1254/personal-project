@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2019-12-17 23:45:56
- * @LastEditTime: 2019-12-17 23:56:18
- * @LastEditors: Please set LastEditors
+ * @LastEditTime : 2019-12-18 15:12:50
+ * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \github项目\admin\src\declare\declare.d.ts
  */
@@ -36,7 +36,7 @@ interface ArticlesItemModel {
 }
 interface CategoriesModel {
   name: string;
-  parent: object[];
+  parent: object[] | string;
 }
 interface CategoriesItemModel {
   _id: string;

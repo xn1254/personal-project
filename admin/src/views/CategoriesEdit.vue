@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-06 15:51:53
- * @LastEditTime: 2019-12-17 23:52:52
- * @LastEditors: Please set LastEditors
+ * @LastEditTime : 2019-12-18 15:10:55
+ * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \express-project\admin\src\views\CategoriesEdit.vue
  -->
@@ -44,6 +44,9 @@ export default class CategoriesEdit extends Vue {
   }
   // 通过id将新增和编辑页面作区分
   public async save() {
+    if (this.model.parent === '') {
+      delete this.model.parent;
+    }
     let res;
     if (this.id) {
       res = await this.$https.put(`rest/categories/${this.id}`, this.model);

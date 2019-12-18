@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-16 00:11:08
- * @LastEditTime: 2019-12-17 23:42:12
- * @LastEditors: Please set LastEditors
+ * @LastEditTime : 2019-12-18 22:03:53
+ * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \github项目\web\src\views\Home.vue
  -->
@@ -72,36 +72,30 @@
 
 <script lang='ts'>
 import { Vue, Component } from 'vue-property-decorator';
+import dayjs from 'dayjs';
 
-@Component
+@Component({
+  name: 'Home',
+  filters: {
+    date(val: any): string {
+      return dayjs(val).format('MM/DD');
+    },
+  },
+})
 export default class Home extends Vue {
   public swiperOption: object = {
     pagination: {
       el: '.pagination-home',
     },
   };
-  public newsCats: NewCatModel[] = [
-    {
-      name: '热门',
-      newsList: [
-        {
-          categoryName: '公告',
-          title: '12324',
-          date: '06/01',
-        },
-      ],
-    },
-    {
-      name: '热门',
-      newsList: [
-        {
-          categoryName: '公告',
-          title: '12324',
-          date: '06/01',
-        },
-      ],
-    },
-  ];
+  public newsCats: NewCatModel[] = [];
+  public created() {
+    this.fetchNewsCats();
+  }
+  public async fetchNewsCats() {
+    const res = await this.$axios.get('news/list');
+    this.newsCats = res.data;
+  }
 }
 </script>
 

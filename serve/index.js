@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2019-12-05 23:46:11
- * @LastEditTime: 2019-12-13 11:27:20
- * @LastEditors: Please set LastEditors
+ * @LastEditTime : 2019-12-18 15:39:46
+ * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \express-project\serve\index.js
  */
@@ -17,6 +17,7 @@ app.use(require('cors')())
 app.use('/uploads', express.static(__dirname + '/uploads'))
 
 require('./routes/admin')(app)
+require('./routes/web')(app)
 require('./plugins/db')(app)
 
 app.listen(3000, () => {

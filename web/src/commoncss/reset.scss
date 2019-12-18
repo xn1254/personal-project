@@ -39,6 +39,13 @@ a{
     }
 }
 
+.text-ellipsis{
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 .w-100{
     width: 100%;
 }
