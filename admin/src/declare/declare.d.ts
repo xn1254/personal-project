@@ -46,6 +46,7 @@ interface CategoriesItemModel {
 interface HeroModel {
   name: string;
   title: string;
+  banner:string;
   categories: string[];
   avatar: string;
   scores: object;

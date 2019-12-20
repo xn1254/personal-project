@@ -36,7 +36,7 @@ module.exports = app => {
       queryOptions.populate = 'parent'
     }
     // populate用于取出数据表的关联字段
-    const items = await Model.find().setOptions(queryOptions).limit(10)
+    const items = await Model.find().setOptions(queryOptions).limit(20)
     res.send(items)
   })
 

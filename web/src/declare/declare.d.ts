@@ -11,9 +11,31 @@ interface ListModel {
     title: string;
     date: string;
 }
+interface HeroModel {
+    name: string;
+    avatar: string;
+}
 interface NewCatModel {
     name: string;
     newsList: ListModel[];
+}
+interface HeroCatModel {
+    name: string;
+    heroList: HeroModel[]
+}
+interface HeroDetailsModel {
+  name: string;
+  title: string;
+  banner:string;
+  categories: string[];
+  avatar: string;
+  scores: object;
+  item1: object[];
+  item2: object[];
+  skills: object[];
+  usageTips: string;
+  battleTips: string;
+  teamTips: string;
 }
 declare module 'vue-awesome-swiper' {
     const VueAwesomeSwiper: any;

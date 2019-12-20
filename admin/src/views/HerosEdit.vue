@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-06 15:51:53
- * @LastEditTime: 2019-12-17 23:54:14
- * @LastEditors: Please set LastEditors
+ * @LastEditTime : 2019-12-20 23:06:37
+ * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \express-project\admin\src\views\CategoriesEdit.vue
  -->
@@ -11,7 +11,7 @@
   <div>
     <h1>{{id ? '编辑' : '新建'}}英雄</h1>
     <el-form @submit.native.prevent="save">
-      <el-tabs type="border-card" value="skills">
+      <el-tabs type="border-card" value="basic">
         <el-tab-pane label="基础信息" name="basic">
           <el-form-item label="名称">
             <el-input v-model="model.name"></el-input>
@@ -64,9 +64,21 @@
               :action="$https.defaults.baseURL + '/upload'"
               :headers="getAuthHeaders()"
               :show-file-list="false"
-              :on-success="afterUpload"
+              :on-success="afterUploadIcon"
             >
               <img v-if="model.avatar" :src="model.avatar" class="avatar">
+              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+            </el-upload>
+          </el-form-item>
+          <el-form-item label="背景图">
+            <el-upload
+              class="avatar-uploader"
+              :action="$https.defaults.baseURL + '/upload'"
+              :headers="getAuthHeaders()"
+              :show-file-list="false"
+              :on-success="afterUploadBanner"
+            >
+              <img v-if="model.banner" :src="model.banner" class="avatar">
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
           </el-form-item>
@@ -90,6 +102,12 @@
                   <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                 </el-upload>
               </el-form-item>
+              <el-form-item label="冷却值">
+                <el-input v-model="item.delay"></el-input>
+              </el-form-item>
+              <el-form-item label="消耗">
+                <el-input v-model="item.cost"></el-input>
+              </el-form-item>
               <el-form-item label="描述">
                 <el-input type="textarea" v-model="item.description"></el-input>
               </el-form-item>
@@ -98,6 +116,31 @@
               </el-form-item>
               <el-form-item>
                 <el-button type="danger" size="small" @click="model.skills.splice(index, 1)">删除</el-button>
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-tab-pane>
+        <el-tab-pane label="最佳搭档" name="partners">
+          <el-button size="small" @click="model.partners.push({})">
+            <i class="el-icon-plus"></i> 添加英雄
+          </el-button>
+          <el-row type="flex" style="flex-wrap: wrap">
+            <el-col v-for="(item, i) in model.partners" :key="i">
+              <el-form-item label="英雄">
+                <el-select filterable v-model="item.hero">
+                  <el-option 
+                  v-for="hero in heros"
+                  :key="hero._id"
+                  :value="hero._id"
+                  :label="hero.name"
+                  ></el-option>
+                </el-select>
+              </el-form-item>
+              <el-form-item label="描述">
+                <el-input v-model="item.description" type="textarea"></el-input>
+              </el-form-item>
+              <el-form-item>
+                <el-button size="small" type="danger" @click="model.partners.splice(i, 1)">删除</el-button>
               </el-form-item>
             </el-col>
           </el-row>
@@ -121,6 +164,7 @@ export default class HerosEdit extends Vue {
     title: '',
     categories: [],
     avatar: '',
+    banner: '',
     scores: {},
     item1: [],
     item2: [],
@@ -131,10 +175,12 @@ export default class HerosEdit extends Vue {
   };
   public categories: object[] = [];
   public items: object[] = [];
+  public heros: object[] = [];
   @Prop({type: String}) public id!: string;
   public created() {
     this.fetchCategories();
     this.fetchItems();
+    this.fetchHeros();
     this.id && this.fetch();
   }
   // 通过id将新增和编辑页面作区分
@@ -163,8 +209,15 @@ export default class HerosEdit extends Vue {
     const res = await this.$https.get(`rest/items`);
     this.items = res.data;
   }
-  public afterUpload(res: any) {
+  public afterUploadIcon(res: any) {
     this.model.avatar = res.url;
+  }
+  public afterUploadBanner(res: any) {
+    this.model.banner = res.url;
+  }
+  public async fetchHeros() {
+    const res = await this.$https.get('rest/heroes');
+    this.heros = res.data;
   }
 }
 </script>

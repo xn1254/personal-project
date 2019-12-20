@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2019-12-06 19:35:43
- * @LastEditTime: 2019-12-09 23:42:21
- * @LastEditors: Please set LastEditors
+ * @LastEditTime : 2019-12-20 23:03:14
+ * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \express-project\serve\models\Category.js
  */
@@ -12,6 +12,9 @@ const schema = new mongoose.Schema({
         type: String
     },
     avatar: {
+        type: String
+    },
+    banner: {
         type: String
     },
     title: {
@@ -33,6 +36,8 @@ const schema = new mongoose.Schema({
     skills: [{
         icon: { type: String },
         name: { type: String },
+        delay: { type: String },
+        cost: { type: Number },
         description: { type: String },
         tips: { type: String }
     }],

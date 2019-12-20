@@ -16,6 +16,9 @@ body{
 a{
     color: #999999;
 }
+p{
+    line-height: 1.5em;
+}
 
 // 定义通用颜色类
 @each $colorKey, $color in $colors {

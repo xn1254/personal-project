@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-16 23:57:31
- * @LastEditTime: 2019-12-17 14:59:24
- * @LastEditors: Please set LastEditors
+ * @LastEditTime : 2019-12-19 20:34:05
+ * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \github项目\web\src\views\Main.vue
  -->
@@ -29,7 +29,7 @@
         </div>
       </div>
     </div>
-    <router-view></router-view>
+    <router-view :key="$route.path"></router-view>
   </div>
 </template>
 <script lang='ts'>

@@ -38,7 +38,7 @@
       <template #items="{category}">
         <router-link 
         tag="div"
-        :to="`/articles/${news._id}`"
+        :to="`/article/${news._id}`"
         class="py-2 fs-lg d-flex" 
         v-for="(news, i) in category.newsList" :key="i">
           <span class="text-info">[{{news.categoryName}}]</span>
@@ -54,7 +54,7 @@
         <div class="d-flex flex-wrap" style="margin: 0 -0.5rem;">
           <router-link
           tag="div"
-          :to="`/heroes/${hero._id}`"
+          :to="`/hero/${hero._id}`"
           class="p-2 text-center"
           style="width: 20%;" 
           v-for="(hero, i) in category.heroList" :key="i">
@@ -89,12 +89,18 @@ export default class Home extends Vue {
     },
   };
   public newsCats: NewCatModel[] = [];
+  public heroCats: HeroCatModel[] = [];
   public created() {
     this.fetchNewsCats();
+    this.fetchHeroCats();
   }
   public async fetchNewsCats() {
     const res = await this.$axios.get('news/list');
     this.newsCats = res.data;
+  }
+  public async fetchHeroCats() {
+    const res = await this.$axios.get('hero/list');
+    this.heroCats = res.data;
   }
 }
 </script>

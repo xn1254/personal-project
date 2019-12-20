@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 16:07:34
- * @LastEditTime: 2019-12-17 17:40:39
- * @LastEditors: Please set LastEditors
+ * @LastEditTime : 2019-12-19 18:31:34
+ * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \github项目\web\src\components\Card.vue
  -->
@@ -31,9 +31,6 @@ export default class Card extends Vue {
   @Prop({type: String, default: 'deafult'}) public title!: string;
   @Prop({type: String, default: 'deafult'}) public icon!: string;
   @Prop({type: Boolean, default: false}) public plain!: boolean;
-  public created() {
-    console.log(this.title);
-  }
 }
 </script>
 
