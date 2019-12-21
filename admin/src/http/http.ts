@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2019-12-06 16:44:15
- * @LastEditTime: 2019-12-13 14:57:05
- * @LastEditors: Please set LastEditors
+ * @LastEditTime : 2019-12-22 00:30:15
+ * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \express-project\admin\src\http\http.ts
  */
@@ -11,7 +11,7 @@ import Vue from 'vue';
 import router from '../router';
 
 const http = axios.create({
-  baseURL: 'http://localhost:3000/admin/api',
+  baseURL: process.env.VUE_APP_API_URL || '/admin/api',
 });
 
 http.interceptors.request.use((config) => {
