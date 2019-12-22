@@ -13,7 +13,7 @@ app.set('secret', 'safsdf')
 
 app.use(express.json())
 app.use(require('cors')())
-console.log(123)
+console.log(12)
 // express托管静态文件
 app.use('/uploads', express.static(__dirname + '/uploads'))
 app.use('/admin', express.static(__dirname + '/admin'))
