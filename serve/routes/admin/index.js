@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-06 19:19:01
- * @LastEditTime : 2019-12-18 14:54:14
+ * @LastEditTime : 2019-12-23 16:52:41
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \express-project\serve\routes\admin\index.js
@@ -71,7 +71,7 @@ module.exports = app => {
   })
   app.post('/admin/api/upload', authMiddleWare, upload.single('file'), async (req, res) => {
     const file = req.file
-    file.url = `http://localhost:3000/uploads/${file.filename}`
+    file.url = `http://193.112.74.229/uploads/${file.filename}`
     res.send(file)
   })
 
