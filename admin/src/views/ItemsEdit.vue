@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-06 15:51:53
- * @LastEditTime: 2019-12-17 23:55:30
- * @LastEditors: Please set LastEditors
+ * @LastEditTime : 2019-12-26 00:48:22
+ * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \express-project\admin\src\views\CategoriesEdit.vue
  -->
@@ -66,7 +66,6 @@ export default class ItemsEdit extends Vue {
     this.model = res.data;
   }
   public afterUpload(res: any) {
-    // this.$set(this.model, 'icon', res.url);
     this.model.icon = res.url;
   }
 }

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-06 19:19:01
- * @LastEditTime : 2019-12-23 16:52:41
+ * @LastEditTime : 2019-12-26 00:47:44
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \express-project\serve\routes\admin\index.js
@@ -65,14 +65,26 @@ module.exports = app => {
 
   // 单独定义文件上传路由
   // express用于获取上传文件的中间件
-  const multer = require('multer')
-  const upload = multer({
-    dest: __dirname + '/../../uploads'
-  })
-  app.post('/admin/api/upload', authMiddleWare, upload.single('file'), async (req, res) => {
-    const file = req.file
-    file.url = `http://193.112.74.229/uploads/${file.filename}`
-    res.send(file)
+  const multer = require('../../plugins/cos')
+  app.post('/admin/api/upload', authMiddleWare, (req, res) => {
+    const upload = multer('file', 1)
+    upload(req, res, function (err) {
+      try {
+        if (err) throw err;
+        if(req.files.length === 0) throw new  Error("不能上传空文件");
+        responseData = {
+          msg:"上传成功",code:2000
+        };
+        responseData.url = 'http://' + req.files[0].url;
+        res.send(responseData);
+      } catch (err) {
+        responseData = {
+          msg:"上传失败",code:4000
+        };
+        responseData.error = err.message;
+        res.status(500).json(responseData);
+      }
+    });
   })
 
   // 定义登录路由

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-05 23:46:11
- * @LastEditTime : 2019-12-18 15:39:46
+ * @LastEditTime : 2019-12-25 14:40:53
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \express-project\serve\index.js
@@ -13,7 +13,6 @@ app.set('secret', 'safsdf')
 
 app.use(express.json())
 app.use(require('cors')())
-console.log(143)
 // express托管静态文件
 app.use('/uploads', express.static(__dirname + '/uploads'))
 app.use('/admin', express.static(__dirname + '/admin'))
