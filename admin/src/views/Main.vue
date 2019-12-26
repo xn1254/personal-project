@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-06 00:00:23
- * @LastEditTime : 2019-12-18 14:41:02
+ * @LastEditTime : 2019-12-26 16:54:04
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \express-project\admin\src\views\Main.vue
@@ -50,6 +50,7 @@
         </el-menu-item-group>
       </el-submenu>
     </el-menu>
+    <el-button @click="logout" type="danger" style="display: block;margin: 10px auto">退出登录</el-button>
   </el-aside>
 
   <el-container>
@@ -84,6 +85,14 @@
       return {
         tableData: Array(20).fill(item),
       };
+    },
+    methods: {
+      logout() {
+        localStorage.removeItem('token');
+        this.$router.push({
+          path: '/login',
+        });
+      },
     },
   };
 </script>

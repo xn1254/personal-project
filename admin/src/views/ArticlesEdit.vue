@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-06 15:51:53
- * @LastEditTime: 2019-12-17 23:51:29
- * @LastEditors: Please set LastEditors
+ * @LastEditTime : 2019-12-26 15:48:55
+ * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \express-project\admin\src\views\CategoriesEdit.vue
  -->
@@ -72,7 +72,7 @@ export default class ArticlesEdit extends Vue {
   }
   // 获取分类未做数据过滤
   public async fetchCategories() {
-    const res = await this.$https.get('rest/categories');
+    const res = await this.$https.get('rest/categories?name=新闻分类');
     this.categories = res.data;
   }
   public async handlerImageAdded(file: any, Editor: any, cursorLocation: any, resetUploader: any) {

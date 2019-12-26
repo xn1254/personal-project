@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-06 19:19:01
- * @LastEditTime : 2019-12-26 00:47:44
+ * @LastEditTime : 2019-12-26 16:29:49
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \express-project\serve\routes\admin\index.js
@@ -36,8 +36,18 @@ module.exports = app => {
       queryOptions.populate = 'parent'
     }
     // populate用于取出数据表的关联字段
-    const items = await Model.find().setOptions(queryOptions).limit(20)
-    res.send(items)
+    let data 
+    if (req.query.name) {
+      const parentID = await Model.find({
+        name: req.query.name
+      })
+      data = await Model.find({
+        parent: parentID[0]._id
+      })
+    } else {
+      data = await Model.find().setOptions(queryOptions).limit(20)
+    }
+    res.send(data)
   })
 
   router.get('/:id', async (req, res) => {

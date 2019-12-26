@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-17 23:45:56
- * @LastEditTime : 2019-12-18 15:12:50
+ * @LastEditTime : 2019-12-26 14:33:04
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \github项目\admin\src\declare\declare.d.ts
@@ -56,6 +56,7 @@ interface HeroModel {
   usageTips: string;
   battleTips: string;
   teamTips: string;
+  partners: object[];
 }
 interface HeroItemModel {
   _id: string;

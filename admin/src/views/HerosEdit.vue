@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-06 15:51:53
- * @LastEditTime : 2019-12-20 23:06:37
+ * @LastEditTime : 2019-12-26 15:23:14
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \express-project\admin\src\views\CategoriesEdit.vue
@@ -172,6 +172,7 @@ export default class HerosEdit extends Vue {
     usageTips: '',
     battleTips: '',
     teamTips: '',
+    partners: [],
   };
   public categories: object[] = [];
   public items: object[] = [];
@@ -202,7 +203,7 @@ export default class HerosEdit extends Vue {
     this.model = Object.assign({}, this.model, res.data);
   }
   public async fetchCategories() {
-    const res = await this.$https.get(`rest/categories`);
+    const res = await this.$https.get('rest/categories?name=英雄分类');
     this.categories = res.data;
   }
   public async fetchItems() {
