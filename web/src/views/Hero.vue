@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-16 23:57:31
- * @LastEditTime : 2019-12-28 17:11:05
+ * @LastEditTime : 2019-12-28 17:12:19
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \github项目\web\src\views\Main.vue
@@ -164,7 +164,6 @@ export default class Article extends Vue {
   }
   public async fetch() {
     const res: any = await getHeroDetails(this.id);
-    console.log(res);
     this.model = res.data;
   }
 }
