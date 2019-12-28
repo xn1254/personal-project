@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-16 23:57:31
- * @LastEditTime : 2019-12-19 19:11:41
+ * @LastEditTime : 2019-12-28 16:52:43
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \github项目\web\src\views\Main.vue
@@ -136,6 +136,7 @@
 </template>
 <script lang='ts'>
 import { Vue, Prop, Component } from 'vue-property-decorator';
+import { getHeroDetails } from '@/api/network';
 
 @Component
 export default class Article extends Vue {
@@ -162,8 +163,7 @@ export default class Article extends Vue {
     return this.model.skills[this.currentSkillIndex];
   }
   public async fetch() {
-    const res = await this.$axios.get(`hero/${this.id}`);
-    console.log(res.data);
+    const res: any = await getHeroDetails(this.id);
     this.model = res.data;
   }
 }

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-16 23:57:31
- * @LastEditTime : 2019-12-19 19:11:41
+ * @LastEditTime : 2019-12-28 16:43:17
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \github项目\web\src\views\Main.vue
@@ -33,6 +33,7 @@
 </template>
 <script lang='ts'>
 import { Vue, Prop, Component } from 'vue-property-decorator';
+import { getArticleDetails } from '@/api/network';
 
 @Component
 export default class Article extends Vue {
@@ -42,7 +43,7 @@ export default class Article extends Vue {
     this.fetch();
   }
   public async fetch() {
-    const res = await this.$axios.get(`article/${this.id}`);
+    const res = await getArticleDetails(this.id);
     this.model = res.data;
   }
 }

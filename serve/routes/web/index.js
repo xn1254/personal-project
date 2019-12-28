@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-18 15:27:27
- * @LastEditTime : 2019-12-18 15:39:25
+ * @LastEditTime : 2019-12-28 16:41:33
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \github项目\serve\routes\web\index.js
@@ -168,4 +168,11 @@ module.exports = app => {
     })
 
     app.use('/web/api', router)
+
+    app.use(async (err, req, res, next) => {
+      res.status(err.status || 500).send({
+        msg: err.message
+      })
+      next()
+    })
 }

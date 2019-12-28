@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-16 00:11:08
- * @LastEditTime : 2019-12-18 22:03:53
+ * @LastEditTime : 2019-12-28 16:52:22
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \github项目\web\src\views\Home.vue
@@ -73,6 +73,7 @@
 <script lang='ts'>
 import { Vue, Component } from 'vue-property-decorator';
 import dayjs from 'dayjs';
+import { getNewsList, getHeroList } from '@/api/network';
 
 @Component({
   name: 'Home',
@@ -95,11 +96,11 @@ export default class Home extends Vue {
     this.fetchHeroCats();
   }
   public async fetchNewsCats() {
-    const res = await this.$axios.get('news/list');
+    const res: any = await getNewsList();
     this.newsCats = res.data;
   }
   public async fetchHeroCats() {
-    const res = await this.$axios.get('hero/list');
+    const res: any = await getHeroList();
     this.heroCats = res.data;
   }
 }
