@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-06 15:51:53
- * @LastEditTime : 2019-12-29 17:30:18
+ * @LastEditTime : 2019-12-30 00:17:40
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \express-project\admin\src\views\CategoriesEdit.vue
@@ -66,7 +66,7 @@ export default class CategoriesEdit extends Vue {
   }
   // 获取分类未做数据过滤
   public async fetchParents() {
-    const res: any = await getCategoryList();
+    const res: any = await getCategoryList('getParent');
     this.parents = res.data;
   }
 }
