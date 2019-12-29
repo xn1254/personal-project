@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-06 15:51:53
- * @LastEditTime: 2019-12-17 23:58:27
- * @LastEditors: Please set LastEditors
+ * @LastEditTime : 2019-12-29 17:08:40
+ * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \express-project\admin\src\views\CategoriesEdit.vue
  -->
@@ -24,7 +24,7 @@
             <el-form-item label="图标">
               <el-upload
                 class="avatar-uploader"
-                :action="$https.defaults.baseURL + '/upload'"
+                :action="$httpsBaseUrl + '/upload'"
                 :headers="getAuthHeaders()"
                 :show-file-list="false"
                 :on-success="res => $set(item, 'image', res.url)"
@@ -48,6 +48,7 @@
 
 <script lang='ts'>
 import { Vue, Component, Prop } from 'vue-property-decorator';
+import { editAds, addAds, getAdsInfo } from '@/api/ads';
 
 @Component
 // 导入的其他文件 例如：import moduleName from 'modulePath';
@@ -64,9 +65,9 @@ export default class AdaEdit extends Vue {
   public async save() {
     let res;
     if (this.id) {
-      res = await this.$https.put(`rest/ads/${this.id}`, this.model);
+      res = await editAds(this.id, this.model);
     } else {
-      res = await this.$https.post('rest/ads', this.model);
+      res = await addAds(this.model);
     }
     this.$router.push('/ads/list');
     this.$message({
@@ -75,7 +76,7 @@ export default class AdaEdit extends Vue {
     });
   }
   public async fetch() {
-    const res = await this.$https.get(`rest/ads/${this.id}`);
+    const res = await getAdsInfo(this.id);
     this.model = Object.assign({}, this.model, res.data);
   }
 }

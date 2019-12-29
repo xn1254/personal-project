@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-06 15:52:10
- * @LastEditTime : 2019-12-18 00:08:29
+ * @LastEditTime : 2019-12-29 16:46:24
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \express-project\admin\src\views\CategoriesList.vue
@@ -29,6 +29,7 @@
 
 <script lang='ts'>
 import { Vue, Component } from 'vue-property-decorator';
+import { getAdminUserList, deleteAdminUser } from '@/api//adminUser';
 
 @Component
 export default class AdminUserList extends Vue {
@@ -37,7 +38,7 @@ export default class AdminUserList extends Vue {
     this.fetch();
   }
   public async fetch() {
-    const res = await this.$https.get('rest/admin_users');
+    const res: any = await getAdminUserList();
     this.items = res.data;
   }
   public async deleteItem(row: UserItemModel) {
@@ -46,7 +47,7 @@ export default class AdminUserList extends Vue {
       cancelButtonText: '取消',
       type: 'warning',
     }).then(async () => {
-      const res = await this.$https.delete(`rest/admin_users/${row._id}`);
+      const res = await deleteAdminUser(row._id);
       this.$message({
         type: 'success',
         message: res.data.msg,

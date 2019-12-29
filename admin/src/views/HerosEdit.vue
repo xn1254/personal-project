@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-06 15:51:53
- * @LastEditTime : 2019-12-26 15:23:14
+ * @LastEditTime : 2019-12-29 18:17:10
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \express-project\admin\src\views\CategoriesEdit.vue
@@ -61,7 +61,7 @@
           <el-form-item label="图标">
             <el-upload
               class="avatar-uploader"
-              :action="$https.defaults.baseURL + '/upload'"
+              :action="$httpsBaseUrl + '/upload'"
               :headers="getAuthHeaders()"
               :show-file-list="false"
               :on-success="afterUploadIcon"
@@ -73,7 +73,7 @@
           <el-form-item label="背景图">
             <el-upload
               class="avatar-uploader"
-              :action="$https.defaults.baseURL + '/upload'"
+              :action="$httpsBaseUrl + '/upload'"
               :headers="getAuthHeaders()"
               :show-file-list="false"
               :on-success="afterUploadBanner"
@@ -93,7 +93,7 @@
               <el-form-item label="图标">
                 <el-upload
                   class="avatar-uploader"
-                  :action="$https.defaults.baseURL + '/upload'"
+                  :action="$httpsBaseUrl + '/upload'"
                   :headers="getAuthHeaders()"
                   :show-file-list="false"
                   :on-success="res => $set(item, 'icon', res.url)"
@@ -155,6 +155,9 @@
 
 <script lang='ts'>
 import { Vue, Component, Prop } from 'vue-property-decorator';
+import { editHero, addHero, getHeroInfo, getHeroList } from '@/api/hero';
+import { getCategoryList } from '@/api/category';
+import { getItemList } from '@/api/item';
 
 @Component
 // 导入的其他文件 例如：import moduleName from 'modulePath';
@@ -188,9 +191,9 @@ export default class HerosEdit extends Vue {
   public async save() {
     let res;
     if (this.id) {
-      res = await this.$https.put(`rest/heroes/${this.id}`, this.model);
+      res = await editHero(this.id, this.model);
     } else {
-      res = await this.$https.post('rest/heroes', this.model);
+      res = await addHero(this.model);
     }
     this.$router.push('/heros/list');
     this.$message({
@@ -199,15 +202,15 @@ export default class HerosEdit extends Vue {
     });
   }
   public async fetch() {
-    const res = await this.$https.get(`rest/heroes/${this.id}`);
+    const res = await getHeroInfo(this.id);
     this.model = Object.assign({}, this.model, res.data);
   }
   public async fetchCategories() {
-    const res = await this.$https.get('rest/categories?name=英雄分类');
+    const res: any = await getCategoryList('英雄分类');
     this.categories = res.data;
   }
   public async fetchItems() {
-    const res = await this.$https.get(`rest/items`);
+    const res: any = await getItemList();
     this.items = res.data;
   }
   public afterUploadIcon(res: any) {
@@ -217,7 +220,7 @@ export default class HerosEdit extends Vue {
     this.model.banner = res.url;
   }
   public async fetchHeros() {
-    const res = await this.$https.get('rest/heroes');
+    const res: any = await getHeroList();
     this.heros = res.data;
   }
 }

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-06 15:51:53
- * @LastEditTime : 2019-12-26 15:48:55
+ * @LastEditTime : 2019-12-29 18:03:00
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \express-project\admin\src\views\CategoriesEdit.vue
@@ -32,6 +32,9 @@
 <script lang='ts'>
 import { Vue, Component, Prop } from 'vue-property-decorator';
 import { VueEditor } from 'vue2-editor';
+import { editArticle, addArticle, getArticleInfo } from '@/api/article';
+import { uploadFile } from '@/api/upload';
+import { getCategoryList } from '@/api/category';
 
 @Component({
   components: {
@@ -56,9 +59,9 @@ export default class ArticlesEdit extends Vue {
   public async save() {
     let res;
     if (this.id) {
-      res = await this.$https.put(`rest/articles/${this.id}`, this.model);
+      res = await editArticle(this.id, this.model);
     } else {
-      res = await this.$https.post('rest/articles', this.model);
+      res = await addArticle(this.model);
     }
     this.$router.push('/articles/list');
     this.$message({
@@ -67,18 +70,20 @@ export default class ArticlesEdit extends Vue {
     });
   }
   public async fetch() {
-    const res = await this.$https.get(`rest/articles/${this.id}`);
+    // const res = await this.$https.get(`rest/articles/${this.id}`);
+    const res: any = getArticleInfo(this.id);
     this.model = res.data;
   }
   // 获取分类未做数据过滤
   public async fetchCategories() {
-    const res = await this.$https.get('rest/categories?name=新闻分类');
+    // const res = await this.$https.get('rest/categories?name=新闻分类');
+    const res: any = await getCategoryList('新闻分类');
     this.categories = res.data;
   }
   public async handlerImageAdded(file: any, Editor: any, cursorLocation: any, resetUploader: any) {
     const formData = new FormData();
     formData.append('file', file);
-    const res = await this.$https.post('upload', formData);
+    const res: any = await uploadFile(formData);
     Editor.insertEmbed(cursorLocation, 'image', res.data.url);
     resetUploader();
   }

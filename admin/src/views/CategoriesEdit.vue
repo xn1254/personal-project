@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-06 15:51:53
- * @LastEditTime : 2019-12-18 15:10:55
+ * @LastEditTime : 2019-12-29 17:30:18
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \express-project\admin\src\views\CategoriesEdit.vue
@@ -28,6 +28,7 @@
 
 <script lang='ts'>
 import { Vue, Component, Prop } from 'vue-property-decorator';
+import { editCategory, addCategory, getCategoryInfo, getCategoryList } from '@/api/category';
 
 @Component
 // 导入的其他文件 例如：import moduleName from 'modulePath';
@@ -49,9 +50,9 @@ export default class CategoriesEdit extends Vue {
     }
     let res;
     if (this.id) {
-      res = await this.$https.put(`rest/categories/${this.id}`, this.model);
+      res = await editCategory(this.id, this.model);
     } else {
-      res = await this.$https.post('rest/categories', this.model);
+      res = await addCategory(this.model);
     }
     this.$router.push('/categories/list');
     this.$message({
@@ -60,12 +61,12 @@ export default class CategoriesEdit extends Vue {
     });
   }
   public async fetch() {
-    const res = await this.$https.get(`rest/categories/${this.id}`);
+    const res: any = await getCategoryInfo(this.id);
     this.model = res.data;
   }
   // 获取分类未做数据过滤
   public async fetchParents() {
-    const res = await this.$https.get('rest/categories');
+    const res: any = await getCategoryList();
     this.parents = res.data;
   }
 }

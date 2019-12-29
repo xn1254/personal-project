@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-06 15:52:10
- * @LastEditTime: 2019-12-17 23:54:41
- * @LastEditors: Please set LastEditors
+ * @LastEditTime : 2019-12-29 18:18:39
+ * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \express-project\admin\src\views\CategoriesList.vue
  -->
@@ -36,6 +36,7 @@
 
 <script lang='ts'>
 import { Vue, Component } from 'vue-property-decorator';
+import { getHeroList, deleteHero } from '@/api/hero';
 
 @Component
 export default class HerosList extends Vue {
@@ -44,7 +45,7 @@ export default class HerosList extends Vue {
     this.fetch();
   }
   public async fetch() {
-    const res = await this.$https.get('rest/heroes');
+    const res: any = await getHeroList();
     this.items = res.data;
   }
   public async deleteItem(row: HeroItemModel) {
@@ -53,7 +54,7 @@ export default class HerosList extends Vue {
       cancelButtonText: '取消',
       type: 'warning',
     }).then(async () => {
-      const res = await this.$https.delete(`rest/heroes/${row._id}`);
+      const res = await deleteHero(row._id);
       this.$message({
         type: 'success',
         message: res.data.msg,

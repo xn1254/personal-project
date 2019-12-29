@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-06 15:51:53
- * @LastEditTime : 2019-12-18 00:08:14
+ * @LastEditTime : 2019-12-29 16:46:15
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \express-project\admin\src\views\CategoriesEdit.vue
@@ -26,6 +26,7 @@
 
 <script lang='ts'>
 import { Vue, Component, Prop } from 'vue-property-decorator';
+import { editAdminUser, addAdminUser, getAdminUserInfo } from '@/api/adminUser';
 
 @Component
 // 导入的其他文件 例如：import moduleName from 'modulePath';
@@ -42,9 +43,11 @@ export default class AdminUserEdit extends Vue {
   public async save() {
     let res;
     if (this.id) {
-      res = await this.$https.put(`rest/admin_users/${this.id}`, this.model);
+      // res = await this.$https.put(`rest/admin_users/${this.id}`, this.model);
+      res = await editAdminUser(this.id, this.model);
     } else {
-      res = await this.$https.post('rest/admin_users', this.model);
+      res = await addAdminUser(this.model);
+      // res = await this.$https.post('rest/admin_users', this.model);
     }
     this.$router.push('/admin_users/list');
     this.$message({
@@ -53,7 +56,8 @@ export default class AdminUserEdit extends Vue {
     });
   }
   public async fetch() {
-    const res = await this.$https.get(`rest/admin_users/${this.id}`);
+    // const res = await this.$https.get(`rest/admin_users/${this.id}`);
+    const res: any = await getAdminUserInfo(this.id);
     this.model = res.data;
   }
 }

@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-11 15:38:36
- * @LastEditTime: 2019-12-17 23:56:49
- * @LastEditors: Please set LastEditors
+ * @LastEditTime : 2019-12-29 16:46:04
+ * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \express-project\admin\src\views\Login.vue
  -->
@@ -25,6 +25,7 @@
 </template>
 <script lang='ts'>
 import { Vue, Component } from 'vue-property-decorator';
+import { login } from '@/api/adminUser';
 
 @Component
 export default class Login extends Vue {
@@ -33,7 +34,7 @@ export default class Login extends Vue {
     password: '',
   };
   public async login() {
-    const res = await this.$https.post('login', this.model);
+    const res: any = await login(this.model);
     localStorage.token = res.data.token;
     this.$message({
       type: 'success',

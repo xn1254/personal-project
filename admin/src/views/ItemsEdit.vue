@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-06 15:51:53
- * @LastEditTime : 2019-12-26 00:48:22
+ * @LastEditTime : 2019-12-29 18:08:19
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \express-project\admin\src\views\CategoriesEdit.vue
@@ -17,7 +17,7 @@
       <el-form-item label="图标">
         <el-upload
           class="avatar-uploader"
-          :action="$https.defaults.baseURL + '/upload'"
+          :action="$httpsBaseUrl + '/upload'"
           :headers="getAuthHeaders()"
           :show-file-list="false"
           :on-success="afterUpload"
@@ -35,6 +35,7 @@
 
 <script lang='ts'>
 import { Vue, Component, Prop } from 'vue-property-decorator';
+import { editItem, addItem, getItemInfo } from '@/api/item';
 
 @Component
 // 导入的其他文件 例如：import moduleName from 'modulePath';
@@ -51,9 +52,9 @@ export default class ItemsEdit extends Vue {
   public async save() {
     let res;
     if (this.id) {
-      res = await this.$https.put(`rest/items/${this.id}`, this.model);
+      res = await editItem(this.id, this.model);
     } else {
-      res = await this.$https.post('rest/items', this.model);
+      res = await addItem(this.model);
     }
     this.$router.push('/items/list');
     this.$message({
@@ -62,7 +63,7 @@ export default class ItemsEdit extends Vue {
     });
   }
   public async fetch() {
-    const res = await this.$https.get(`rest/items/${this.id}`);
+    const res: any = await getItemInfo(this.id);
     this.model = res.data;
   }
   public afterUpload(res: any) {
