@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2019-12-05 23:46:11
- * @LastEditTime : 2019-12-25 14:40:53
- * @LastEditors  : Please set LastEditors
+ * @LastEditTime: 2021-08-24 22:03:31
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \express-project\serve\index.js
  */
@@ -23,5 +23,5 @@ require('./routes/web')(app)
 require('./plugins/db')(app)
 
 app.listen(3000, () => {
-  console.log('start')
+  console.log('start111')
 })
